@@ -104,7 +104,7 @@ class HomePage extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "YOUR PROFILE",
+                            "50 AngelCoins | PROFILE",
                             style: Theme.of(context).textTheme.headline4,
                           ),
                         ),
@@ -141,14 +141,20 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          Text(
-              "Don't have the products in your home for donation? Give us the money we will buy them for you.",
-              style: TextStyle(
-                color: Color(0xFF6E96EF),
-                fontSize: 20.0,
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Rubik',
-              )),
+          Padding(
+            padding: EdgeInsets.only(
+              right: MediaQuery.of(context).size.width * 0.10,
+              left: MediaQuery.of(context).size.width * 0.15,
+            ),
+            child: Text(
+                "Don't have the products in your home for donation? Give us the money we will buy them for you.",
+                style: TextStyle(
+                  color: Color(0xFF6E96EF),
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Rubik',
+                )),
+          ),
           ButtonTheme(
             minWidth: MediaQuery.of(context).size.width * 0.6,
             child: RaisedButton(
@@ -182,7 +188,7 @@ class HomePage extends StatelessWidget {
                 );
               },
               child: Text(
-                "Leave feedback",
+                "Our Organizations",
                 style: Theme.of(context).textTheme.headline6,
               ),
             ),

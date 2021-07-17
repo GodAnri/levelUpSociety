@@ -8,6 +8,7 @@ import 'package:smartcon_app/services/database.dart';
 
 import '../profile.dart';
 import 'conferenceList.dart';
+import 'donateDetails.dart';
 
 class Donate extends StatefulWidget {
   Donate({Key key}) : super(key: key);
@@ -22,7 +23,7 @@ class _Donate extends State<Donate> {
   bool _rating = false;
   bool _near = false;
   List<DateTime> _dates = [];
-  String datesStr = 'Must Pick a date';
+  String datesStr = 'Date of the delivery';
 
   _onDateChanged(picked) {
     setState(() {
@@ -36,12 +37,61 @@ class _Donate extends State<Donate> {
 
   String _organization;
   String _name;
+  String _address;
+
+  Widget _buildAdress() {
+    return TextFormField(
+      key: Key('address_field'),
+      decoration: new InputDecoration(
+        labelText: "Adress to fetch the donation",
+        fillColor: Colors.white,
+        border: new OutlineInputBorder(
+          borderRadius: new BorderRadius.circular(10.0),
+          borderSide: new BorderSide(),
+        ),
+      ),
+      maxLength: 30,
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'Address is Required';
+        }
+        return null;
+      },
+      onSaved: (String value) {
+        _name = value;
+      },
+    );
+  }
+
+  Widget _buildPhoneNumber() {
+    return TextFormField(
+      key: Key('number_field'),
+      decoration: new InputDecoration(
+        labelText: "Phone Number",
+        fillColor: Colors.white,
+        border: new OutlineInputBorder(
+          borderRadius: new BorderRadius.circular(10.0),
+          borderSide: new BorderSide(),
+        ),
+      ),
+      maxLength: 30,
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'Phone Number';
+        }
+        return null;
+      },
+      onSaved: (String value) {
+        _name = value;
+      },
+    );
+  }
 
   Widget _buildName() {
     return TextFormField(
       key: Key('name_field'),
       decoration: new InputDecoration(
-        labelText: "Name",
+        labelText: "Name of the person responsible",
         fillColor: Colors.white,
         border: new OutlineInputBorder(
           borderRadius: new BorderRadius.circular(10.0),
@@ -80,7 +130,7 @@ class _Donate extends State<Donate> {
         },
         validator: (value) {
           if (value == null) {
-            return 'Please choose an organization';
+            return 'Organization to donate to';
           }
           return null;
         },
@@ -131,181 +181,150 @@ class _Donate extends State<Donate> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Donation>>.value(
-      value: DatabaseService().donations,
-      child: Scaffold(
-        key: Key('donate_page'),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              // HEADER IMAGE (100%)
-              Row(children: <Widget>[
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Image.asset('images/pageHeader.png', fit: BoxFit.fill),
-                ),
-              ]),
-
-              // CONTENT ROW
-              Row(children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.08,
-                    right: MediaQuery.of(context).size.width * 0.08,
-                  ),
-                  child: Column(
+        value: DatabaseService().donations,
+        child: Scaffold(
+            key: Key('donate_page'),
+            body: SingleChildScrollView(
+                child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      // Page title
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.84,
-                        child: Text(
-                          "Donate",
-                          style: Theme.of(context).textTheme.headline2,
+                  // HEADER IMAGE (100%)
+                  Row(children: <Widget>[
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Image.asset('images/pageHeader.png',
+                          fit: BoxFit.fill),
+                    ),
+                  ]),
+
+                  // CONTENT ROW
+                  Row(children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.08,
+                          right: MediaQuery.of(context).size.width * 0.08,
                         ),
-                        alignment: Alignment.topLeft,
-                      ),
-
-                      //Manage Profile Button
-                      SizedBox(height: 10),
-                      RaisedButton(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            side: BorderSide(color: Colors.black26, width: 2)),
-                        highlightElevation: 40.0,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Profile()),
-                          );
-                        },
-                        child: Text("MANAGE PROFILE",
-                            style: TextStyle(
-                              color: Colors.black38,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'Rubik',
-                            )),
-                      ),
-
-                      SizedBox(height: 20),
-                      Text(
-                        'DATE',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-
-                      // Date Picker
-                      SizedBox(height: 10),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.84,
-                        child: Row(
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.54,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      width: 2.0, color: Colors.black26),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0))),
-                              child: Text(datesStr,
-                                  style: TextStyle(
-                                    color: Colors.black87,
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'Rubik',
-                                  )),
-                              padding: EdgeInsets.only(left: 10),
-                              alignment: Alignment.centerLeft,
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.3,
-                              child: ButtonTheme(
-                                height: 50,
-                                child: MaterialButton(
-                                    color: Color(0xFF6E96EF),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0)),
-                                    highlightElevation: 40.0,
-                                    onPressed: () async {
-                                      final List<DateTime> picked =
-                                          await DateRagePicker.showDatePicker(
-                                        context: context,
-                                        initialFirstDate: new DateTime.now(),
-                                        initialLastDate: (new DateTime.now())
-                                            .add(new Duration(days: 7)),
-                                        firstDate: new DateTime(2020),
-                                        lastDate: new DateTime(2022),
-                                      );
-                                      if (picked != null &&
-                                          picked.length == 2) {
-                                        print(picked);
-                                        _onDateChanged(picked);
-                                      }
-                                    },
-                                    child: Text(
-                                      "CHANGE",
-                                      style:
-                                          Theme.of(context).textTheme.headline6,
-                                      textAlign: TextAlign.center,
-                                    )),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              // Page title
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.84,
+                                child: Text(
+                                  "Donate",
+                                  style: Theme.of(context).textTheme.headline2,
+                                ),
+                                alignment: Alignment.topLeft,
                               ),
+                            ]))
+                  ]),
+
+                  Container(
+                    margin: EdgeInsets.all(24),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          _buildOrganization(),
+                          SizedBox(height: 15),
+                          _buildAdress(),
+                          SizedBox(height: 15),
+                          _buildName(),
+                          SizedBox(height: 15),
+                          _buildPhoneNumber(),
+
+                          // Date Picker
+                          SizedBox(height: 10),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.84,
+                            child: Row(
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.54,
+                                  height: 50.0,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          width: 2.0, color: Colors.black26),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0))),
+                                  child: Text(datesStr,
+                                      style: TextStyle(
+                                        color: Colors.black87,
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: 'Rubik',
+                                      )),
+                                  padding: EdgeInsets.only(left: 10),
+                                  alignment: Alignment.centerLeft,
+                                ),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.3,
+                                  child: ButtonTheme(
+                                    height: 50,
+                                    child: MaterialButton(
+                                        color: Color(0xFF6E96EF),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0)),
+                                        highlightElevation: 40.0,
+                                        onPressed: () async {
+                                          final List<DateTime> picked =
+                                              await DateRagePicker
+                                                  .showDatePicker(
+                                            context: context,
+                                            initialFirstDate:
+                                                new DateTime.now(),
+                                            initialLastDate:
+                                                (new DateTime.now())
+                                                    .add(new Duration(days: 7)),
+                                            firstDate: new DateTime(2020),
+                                            lastDate: new DateTime(2022),
+                                          );
+                                          if (picked != null &&
+                                              picked.length == 2) {
+                                            print(picked);
+                                            _onDateChanged(picked);
+                                          }
+                                        },
+                                        child: Text(
+                                          "CHANGE",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline6,
+                                          textAlign: TextAlign.center,
+                                        )),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ]),
+                          ),
 
-              Container(
-                margin: EdgeInsets.all(24),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      _buildOrganization(),
-                      SizedBox(height: 15),
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        child: RaisedButton(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                                side: BorderSide(
-                                    color: Colors.black26, width: 2)),
-                            child: Text('DONE ',
-                                style: TextStyle(
-                                  color: Colors.black38,
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: 'Rubik',
-                                )),
-                            onPressed: onNext),
+                          Container(
+                            padding: EdgeInsets.all(8),
+                            child: RaisedButton(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    side: BorderSide(
+                                        color: Colors.black26, width: 2)),
+                                child: Text('DETAILS ',
+                                    style: TextStyle(
+                                      color: Colors.black38,
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'Rubik',
+                                    )),
+                                onPressed: onNext),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-
-              Row(
-                children: [
-                  ConferenceList(
-                      filterDistrict: _near,
-                      ratingOrder: _rating,
-                      dates: _dates)
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+                ]))));
   }
 
   onNext() {
@@ -314,11 +333,7 @@ class _Donate extends State<Donate> {
       //buildConference();
       Navigator.push(
         context,
-        MaterialPageRoute(
-            /*builder: (context) => conferenceSessions(
-                  conference: _conference,
-                )*/
-            ),
+        MaterialPageRoute(builder: (context) => DonateDetails()),
       );
     }
   }

@@ -40,10 +40,6 @@ class ProfileAwards extends StatelessWidget {
                           ),
                           alignment: Alignment.topLeft,
                         ),
-                        Container(
-                            child: CircularProgressIndicator(
-                          value: 120.0,
-                        ))
                       ]))
             ])
           ])
