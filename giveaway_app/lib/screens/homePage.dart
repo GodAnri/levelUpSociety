@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:smartcon_app/models/user.dart';
-import 'package:smartcon_app/screens/profile.dart';
+
 import 'package:smartcon_app/screens/profileAwards.dart';
 import 'package:smartcon_app/services/auth.dart';
-import 'package:smartcon_app/services/database.dart';
 import '../wrapper.dart';
 import 'conferenceSuggestions/donate.dart';
+import 'conferenceSuggestions/specialDonation.dart';
 import 'insertConference/insertConference.dart';
 
 class HomePage extends StatelessWidget {
@@ -128,7 +126,7 @@ class HomePage extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.width * 0.10,
+              top: MediaQuery.of(context).size.width * 0.08,
             ),
             child: ButtonTheme(
               minWidth: MediaQuery.of(context).size.width * 0.6,
@@ -182,7 +180,7 @@ class HomePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Donate()),
+                      MaterialPageRoute(builder: (context) => SpecialDonate()),
                     );
                   },
                   child: Row(children: [
@@ -195,7 +193,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Sepecial donation",
+                      "Special donation",
                       style: Theme.of(context).textTheme.headline6,
                     ),
                   ])),

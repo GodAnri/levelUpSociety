@@ -8,8 +8,7 @@ import 'package:flutter_spinning_wheel/flutter_spinning_wheel.dart';
 class Wheel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        key: Key('insert_conference_page'), body: SingleChildScrollView());
+    return Scaffold(key: Key('insert_conference_page'), body: SpiningWheel());
   }
 }
 
@@ -61,7 +60,7 @@ class _SpiningWheelState extends State<SpiningWheel> {
             ),
             SizedBox(height: 30),
             new ElevatedButton(
-              child: new Text("Start"),
+              child: new Text("Spin"),
               onPressed: () =>
                   _wheelNotifier.sink.add(_generateRandomVelocity()),
             )
@@ -80,14 +79,14 @@ class RouletteScore extends StatelessWidget {
   final int selected;
 
   final Map<int, String> labels = {
-    1: '1000\$',
-    2: '400\$',
-    3: '800\$',
-    4: '7000\$',
-    5: '5000\$',
-    6: '300\$',
-    7: '2000\$',
-    8: '100\$',
+    1: 'Spin Again',
+    2: 'Double donation',
+    3: 'Sorry',
+    4: 'Double coins',
+    5: 'Special Donation',
+    6: 'Extra Coins',
+    7: 'Sorry',
+    8: 'Special Donation',
   };
 
   RouletteScore(this.selected);

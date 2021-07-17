@@ -1,4 +1,3 @@
-import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,16 +6,14 @@ import 'package:smartcon_app/models/donation.dart';
 import 'package:smartcon_app/screens/insertConference/insertItems.dart';
 import 'package:smartcon_app/services/database.dart';
 
-import '../homePage.dart';
-
-class Donate extends StatefulWidget {
-  Donate({Key key}) : super(key: key);
+class SpecialDonate extends StatefulWidget {
+  SpecialDonate({Key key}) : super(key: key);
 
   @override
-  _Donate createState() => _Donate();
+  _SpecialDonate createState() => _SpecialDonate();
 }
 
-class _Donate extends State<Donate> {
+class _SpecialDonate extends State<SpecialDonate> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool _rating = false;
@@ -36,36 +33,12 @@ class _Donate extends State<Donate> {
 
   String _organization;
   String _name;
-  String _address;
+  String _money;
   List<String> _speakers = new List<String>();
-
-  Widget _buildAdress() {
-    return TextFormField(
-      key: Key('address_field'),
-      decoration: new InputDecoration(
-        labelText: "Adress to fetch the donation",
-        fillColor: Colors.white,
-        border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(10.0),
-          borderSide: new BorderSide(),
-        ),
-      ),
-      maxLength: 30,
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Address is Required';
-        }
-        return null;
-      },
-      onSaved: (String value) {
-        _name = value;
-      },
-    );
-  }
 
   Widget _buildPhoneNumber() {
     return TextFormField(
-      key: Key('number_field'),
+      key: Key('number_field2'),
       decoration: new InputDecoration(
         labelText: "Phone Number",
         fillColor: Colors.white,
@@ -107,6 +80,30 @@ class _Donate extends State<Donate> {
       },
       onSaved: (String value) {
         _name = value;
+      },
+    );
+  }
+
+  Widget _buildMoney() {
+    return TextFormField(
+      key: Key('money_field'),
+      decoration: new InputDecoration(
+        labelText: "How much do you want us to spend? Euros",
+        fillColor: Colors.white,
+        border: new OutlineInputBorder(
+          borderRadius: new BorderRadius.circular(10.0),
+          borderSide: new BorderSide(),
+        ),
+      ),
+      maxLength: 30,
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'A quantity is required';
+        }
+        return null;
+      },
+      onSaved: (String value) {
+        _money = value;
       },
     );
   }
@@ -228,81 +225,23 @@ class _Donate extends State<Donate> {
                         children: <Widget>[
                           _buildOrganization(),
                           SizedBox(height: 15),
-                          _buildAdress(),
-                          SizedBox(height: 15),
                           _buildName(),
                           SizedBox(height: 15),
                           _buildPhoneNumber(),
-
-                          // Date Picker
-                          SizedBox(height: 10),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.84,
-                            child: Row(
-                              children: [
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.54,
-                                  height: 50.0,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          width: 2.0, color: Colors.black26),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0))),
-                                  child: Text(datesStr,
-                                      style: TextStyle(
-                                        color: Colors.black87,
-                                        fontSize: 15.0,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Rubik',
-                                      )),
-                                  padding: EdgeInsets.only(left: 10),
-                                  alignment: Alignment.centerLeft,
-                                ),
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.3,
-                                  child: ButtonTheme(
-                                    height: 50,
-                                    child: MaterialButton(
-                                        color: Color(0xFF6E96EF),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0)),
-                                        highlightElevation: 40.0,
-                                        onPressed: () async {
-                                          final List<DateTime> picked =
-                                              await DateRagePicker
-                                                  .showDatePicker(
-                                            context: context,
-                                            initialFirstDate:
-                                                new DateTime.now(),
-                                            initialLastDate:
-                                                (new DateTime.now())
-                                                    .add(new Duration(days: 7)),
-                                            firstDate: new DateTime(2020),
-                                            lastDate: new DateTime(2022),
-                                          );
-                                          if (picked != null &&
-                                              picked.length == 2) {
-                                            print(picked);
-                                            _onDateChanged(picked);
-                                          }
-                                        },
-                                        child: Text("CHANGE",
-                                            style: TextStyle(
-                                              color: Colors.black38,
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.w700,
-                                              fontFamily: 'Rubik',
-                                            ))),
-                                  ),
-                                ),
-                              ],
-                            ),
+                          SizedBox(height: 15),
+                          _buildMoney(),
+                          Text('Select a payment method:',
+                              style: TextStyle(
+                                color: Colors.black38,
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'Rubik',
+                              )),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: Image.asset('images/payment.png',
+                                fit: BoxFit.fill),
                           ),
-
                           Container(
                             padding: EdgeInsets.all(8),
                             child: RaisedButton(
@@ -320,7 +259,6 @@ class _Donate extends State<Donate> {
                                     )),
                                 onPressed: onNext),
                           ),
-
                           Container(
                             padding: EdgeInsets.all(8),
                             child: RaisedButton(
@@ -355,61 +293,63 @@ class _Donate extends State<Donate> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       //buildConference();
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => InsertItems(
-                  speakers: _speakers,
-                )),
-      );
+      showAlertDialog(context);
     }
   }
-}
 
-showAlertDialog(BuildContext context) {
-  // set up the button
-  Widget okButton = TextButton(
-    child: Text("OK"),
-    onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-      );
-    },
-  );
+  showAlertDialog(BuildContext context) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("Give to the organization"),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => InsertItems(
+                    speakers: _speakers,
+                  )),
+        );
+      },
+    );
 
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: Text("My title"),
-    content: Column(
-      children: [
-        Container(
-          child: Image.asset(
-            'images/coins.png',
-            width: 100,
+    Widget okButton2 = TextButton(
+      child: Text("Please refund"),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => InsertItems(
+                    speakers: _speakers,
+                  )),
+        );
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Read Carefully"),
+      content: Column(
+        children: [
+          Text(
+            "Since this is a Special Donation we ask you to indicate a place or link where we can buy the products, otherwise we will resort to our default makerts (you can check them in our website. You have to opptions for the money that is not spend in the products, give it to the organization or we can return it. Please choose one of the options bellow. Thank you.",
+            style: TextStyle(
+              color: Colors.blue,
+              fontSize: 20.0,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Rubik',
+            ),
           ),
-        ),
-        Text(
-          "You just won extra G coins!!",
-          style: TextStyle(
-            color: Colors.blue,
-            fontSize: 20.0,
-            fontWeight: FontWeight.w500,
-            fontFamily: 'Rubik',
-          ),
-        ),
-      ],
-    ),
-    actions: [
-      okButton,
-    ],
-  );
+        ],
+      ),
+      actions: [okButton, okButton2],
+    );
 
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 }
