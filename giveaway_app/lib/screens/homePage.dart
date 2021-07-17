@@ -91,27 +91,37 @@ class HomePage extends StatelessWidget {
                         right: MediaQuery.of(context).size.width * 0.08,
                         top: MediaQuery.of(context).size.width * 0.08,
                       ),
-                      child: RaisedButton(
-                        key: Key('manage_profile_btn'),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProfileAwards()),
-                          );
-                        },
-                        color: Color(0xFF6E96EF),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "50 AngelCoins | PROFILE",
-                            style: Theme.of(context).textTheme.headline4,
+                      child: Row(children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.08,
+                          child: Image.asset(
+                            'images/coins.png',
+                            height: 20,
+                            width: 20,
                           ),
                         ),
-                        elevation: 5,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                      )),
+                        RaisedButton(
+                          key: Key('manage_profile_btn'),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProfileAwards()),
+                            );
+                          },
+                          color: Color(0xFF6E96EF),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "PROFILE",
+                              style: Theme.of(context).textTheme.headline4,
+                            ),
+                          ),
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
+                        ),
+                      ])),
                 ],
               ),
             ],
@@ -156,23 +166,39 @@ class HomePage extends StatelessWidget {
                   fontFamily: 'Rubik',
                 )),
           ),
-          ButtonTheme(
-            minWidth: MediaQuery.of(context).size.width * 0.6,
-            child: RaisedButton(
-              color: Color(0xFF6E96EF),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)),
-              highlightElevation: 20.0,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Donate()),
-                );
-              },
-              child: Text(
-                "Sepecial donation",
-                style: Theme.of(context).textTheme.headline6,
-              ),
+          Padding(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.width * 0.01,
+              right: MediaQuery.of(context).size.width * 0.20,
+              left: MediaQuery.of(context).size.width * 0.20,
+            ),
+            child: ButtonTheme(
+              minWidth: MediaQuery.of(context).size.width * 0.6,
+              child: RaisedButton(
+                  color: Color(0xFF6E96EF),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0)),
+                  highlightElevation: 20.0,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Donate()),
+                    );
+                  },
+                  child: Row(children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.1,
+                      child: Image.asset(
+                        'images/coins.png',
+                        height: 20,
+                        width: 20,
+                      ),
+                    ),
+                    Text(
+                      "Sepecial donation",
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                  ])),
             ),
           ),
           Padding(
