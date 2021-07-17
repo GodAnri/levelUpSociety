@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "741951289997",
+    "firebase_url": "https://smartcon-app.firebaseio.com",
+    "project_id": "smartcon-app",
+    "storage_bucket": "smartcon-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741951289997:android:c042d5d857b485461180c4",
+        "android_client_info": {
+          "package_name": "com.example.smartcon_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "741951289997-l4bpq6nmv1lvc9es0lbrcpdb49btt6hb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smartcon_app",
+            "certificate_hash": "cd0a1ad38679022918e24adbcb28a2e0b381d8c5"
+          }
+        },
+        {
+          "client_id": "741951289997-ni2sdmlrb3f2q5h1pci5op7lebkn7d4d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smartcon_app",
+            "certificate_hash": "0ebbb32be0ee647d44d97ecb55be9074d3b1b4dc"
+          }
+        },
+        {
+          "client_id": "741951289997-8fs0a4urhdkef96gc13aer9ja4m8ight.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQm6ICiz1F-Nuc1aeODoW0wxBTpBqCJ0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "741951289997-mudp74q4usv7s5juq6sj4l6qoe5bpj20.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "741951289997-np010em115dcr5a47ah0n45dvc4dphko.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.smartconApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
