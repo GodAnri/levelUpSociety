@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smartcon_app/models/donation.dart';
+import 'package:smartcon_app/screens/insertConference/insertItems.dart';
+import 'package:smartcon_app/screens/insertConference/insertTopics.dart';
 import 'package:smartcon_app/services/database.dart';
 
 import '../profile.dart';
@@ -38,6 +40,7 @@ class _Donate extends State<Donate> {
   String _organization;
   String _name;
   String _address;
+  List<String> _speakers = new List<String>();
 
   Widget _buildAdress() {
     return TextFormField(
@@ -320,6 +323,24 @@ class _Donate extends State<Donate> {
                                     )),
                                 onPressed: onNext),
                           ),
+
+                          Container(
+                            padding: EdgeInsets.all(8),
+                            child: RaisedButton(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    side: BorderSide(
+                                        color: Colors.black26, width: 2)),
+                                child: Text('DONATE ',
+                                    style: TextStyle(
+                                      color: Colors.black38,
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'Rubik',
+                                    )),
+                                onPressed: onNext),
+                          ),
                         ],
                       ),
                     ),
@@ -333,7 +354,10 @@ class _Donate extends State<Donate> {
       //buildConference();
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => DonateDetails()),
+        MaterialPageRoute(
+            builder: (context) => InsertItems(
+                  speakers: _speakers,
+                )),
       );
     }
   }

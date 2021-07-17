@@ -3,6 +3,7 @@ import 'package:smartcon_app/models/sessionNO.dart';
 import 'package:smartcon_app/screens/conferenceSuggestions/donate.dart';
 import 'package:time_range/time_range.dart';
 import 'package:smartcon_app/screens/insertConference/insertSpeakers.dart';
+import 'insertItems.dart';
 import 'insertTopics.dart';
 
 class NewSession extends StatefulWidget {
@@ -145,7 +146,7 @@ class _NewSessionState extends State<NewSession> {
               var receivedSpeakers = await Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => InsertSpeakers(
+                    builder: (context) => InsertItems(
                           speakers: _speakers,
                         )),
               );

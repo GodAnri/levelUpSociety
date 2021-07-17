@@ -118,7 +118,7 @@ class HomePage extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.width * 0.15,
+              top: MediaQuery.of(context).size.width * 0.10,
             ),
             child: ButtonTheme(
               minWidth: MediaQuery.of(context).size.width * 0.6,
@@ -143,11 +143,12 @@ class HomePage extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(
-              right: MediaQuery.of(context).size.width * 0.10,
+              top: MediaQuery.of(context).size.width * 0.03,
+              right: MediaQuery.of(context).size.width * 0.15,
               left: MediaQuery.of(context).size.width * 0.15,
             ),
-            child: Text(
-                "Don't have the products in your home for donation? Give us the money we will buy them for you.",
+            child: Text("Don't have any products? We'll buy them for you",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color(0xFF6E96EF),
                   fontSize: 20.0,
@@ -174,35 +175,48 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          ButtonTheme(
-            minWidth: MediaQuery.of(context).size.width * 0.6,
-            child: RaisedButton(
-              color: Color(0xFF6E96EF),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)),
-              highlightElevation: 20.0,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
-              },
-              child: Text(
-                "Our Organizations",
-                style: Theme.of(context).textTheme.headline6,
+          Padding(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.width * 0.02,
+            ),
+            child: ButtonTheme(
+              minWidth: MediaQuery.of(context).size.width * 0.6,
+              child: RaisedButton(
+                color: Color(0xFF6E96EF),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                highlightElevation: 20.0,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
+                },
+                child: Text(
+                  "Our Parteners",
+                  style: Theme.of(context).textTheme.headline6,
+                ),
               ),
             ),
           ),
           SizedBox(
             height: 15,
           ),
-          Text("Are you an organization and want to join?",
-              style: TextStyle(
-                color: Color(0xFF5BBDB8),
-                fontSize: 20.0,
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Rubik',
-              )),
+          Padding(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.width * 0.02,
+              right: MediaQuery.of(context).size.width * 0.15,
+              left: MediaQuery.of(context).size.width * 0.15,
+            ),
+            child: Text("Are you an organization? Join us on this mission",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color(0xFF5BBDB8),
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Rubik',
+                )),
+          ),
           ButtonTheme(
             minWidth: MediaQuery.of(context).size.width * 0.6,
             child: RaisedButton(
@@ -218,7 +232,7 @@ class HomePage extends StatelessWidget {
                 );
               },
               child: Text(
-                "Create Partenership",
+                "Start partnership",
                 style: Theme.of(context).textTheme.headline6,
               ),
             ),
