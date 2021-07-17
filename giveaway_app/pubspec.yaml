@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_spinning_wheel: ^1.1.0
   material_design_icons_flutter: 4.0.5955
   google_fonts: ^1.1.1
   dropdown_formfield: ^0.1.3
