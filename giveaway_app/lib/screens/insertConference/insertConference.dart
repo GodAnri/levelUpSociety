@@ -1,8 +1,7 @@
 import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:smartcon_app/models/conferenceNO.dart';
-import 'conferenceSessions.dart';
+import 'package:giveaway_app/models/conferenceNO.dart';
 
 class InsertConference extends StatefulWidget {
   @override
@@ -346,18 +345,18 @@ class InsertConferenceState extends State<InsertConference> {
                 Container(
                   padding: EdgeInsets.all(8),
                   child: RaisedButton(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          side: BorderSide(color: Colors.black26, width: 2)),
-                      child: Text('NEXT',
-                          style: TextStyle(
-                            color: Colors.black38,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Rubik',
-                          )),
-                      onPressed: onNext),
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        side: BorderSide(color: Colors.black26, width: 2)),
+                    child: Text('NEXT',
+                        style: TextStyle(
+                          color: Colors.black38,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: 'Rubik',
+                        )),
+                  ),
                 ),
               ],
             ),
@@ -365,19 +364,5 @@ class InsertConferenceState extends State<InsertConference> {
         ),
       ])),
     );
-  }
-
-  onNext() {
-    if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
-      buildConference();
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => conferenceSessions(
-                  conference: _conference,
-                )),
-      );
-    }
   }
 }

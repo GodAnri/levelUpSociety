@@ -1,19 +1,5 @@
-import 'dart:async';
-import 'dart:math';
-
-import 'package:chips_choice/chips_choice.dart';
-import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:smartcon_app/models/sessionNO.dart';
-import 'package:smartcon_app/models/user.dart';
-import 'package:smartcon_app/screens/profile.dart';
-import 'package:smartcon_app/screens/wheel.dart';
-import 'package:smartcon_app/services/database.dart';
-
-import 'common/sessionTile.dart';
-import 'conferenceSuggestions/donate.dart';
-import 'package:flutter_spinning_wheel/flutter_spinning_wheel.dart';
+import 'package:giveaway_app/screens/wheel.dart';
 
 class ProfileAwards extends StatelessWidget {
   @override
@@ -154,31 +140,6 @@ class ProfileAwards extends StatelessWidget {
           ),
         ),
       ])),
-    );
-  }
-}
-
-class SessionList extends StatefulWidget {
-  const SessionList({Key key, this.sessions}) : super(key: key);
-
-  final List<Session> sessions;
-
-  @override
-  _SessionListState createState() => _SessionListState();
-}
-
-class _SessionListState extends State<SessionList> {
-  @override
-  Widget build(BuildContext context) {
-    return Flexible(
-      child: ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: widget.sessions.length,
-        itemBuilder: (context, index) {
-          return SessionTile(session: widget.sessions[index]);
-        },
-      ),
     );
   }
 }

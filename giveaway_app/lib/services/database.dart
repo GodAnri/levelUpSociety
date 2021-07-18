@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:smartcon_app/models/conferenceNO.dart';
-import 'package:smartcon_app/models/donation.dart';
-import 'package:smartcon_app/models/sessionNO.dart';
-import 'package:smartcon_app/models/user.dart';
+import 'package:giveaway_app/models/conferenceNO.dart';
+import 'package:giveaway_app/models/donation.dart';
+import 'package:giveaway_app/models/sessionNO.dart';
+import 'package:giveaway_app/models/user.dart';
 
 class DatabaseService {
   final String uid; // User Id

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:smartcon_app/screens/profileAwards.dart';
-import 'package:smartcon_app/services/auth.dart';
+import 'package:giveaway_app/screens/profileAwards.dart';
+import 'package:giveaway_app/services/auth.dart';
 import '../wrapper.dart';
 import 'conferenceSuggestions/donate.dart';
 import 'conferenceSuggestions/specialDonation.dart';
@@ -31,9 +31,18 @@ class HomePage extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Column(
                       children: [
-                        Text(
-                          "GiveAway",
-                          style: Theme.of(context).textTheme.headline1,
+                        Row(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(
+                                  left: 55.0, right: 10.0),
+                              child: Image.asset('images/logo.png', width: 60),
+                            ),
+                            Text(
+                              "GiveAway",
+                              style: Theme.of(context).textTheme.headline1,
+                            ),
+                          ],
                         ),
                         SizedBox(
                           height: 7,

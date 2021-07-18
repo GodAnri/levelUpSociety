@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smartcon_app/services/auth.dart';
+import 'package:giveaway_app/services/auth.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -7,7 +7,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final AuthService _auth = AuthService();
   String error = '';
   bool loading = false;
@@ -36,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
       splashColor: Colors.grey,
       onPressed: () async {
         dynamic result = await _auth.signInWithGoogle();
-        if(result == null) {
+        if (result == null) {
           setState(() {
             loading = false;
             error = 'Could not sign in with those credentials';
@@ -55,7 +54,12 @@ class _LoginPageState extends State<LoginPage> {
             Image(image: AssetImage("images/google_logo.png"), height: 35.0),
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Text('Sign in with Google',style: TextStyle(fontSize: 20,color: Colors.grey,),
+              child: Text(
+                'Sign in with Google',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.grey,
+                ),
               ),
             )
           ],

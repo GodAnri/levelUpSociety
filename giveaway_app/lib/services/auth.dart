@@ -1,16 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:smartcon_app/models/user.dart';
+import 'package:giveaway_app/models/user.dart';
 
 import 'database.dart';
 
 class AuthService {
-
   GoogleSignIn googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // create user obj based on firebase user
-  SmartconUser _userFromFirebaseUser(User user){
+  SmartconUser _userFromFirebaseUser(User user) {
     return user != null ? SmartconUser(uid: user.uid) : null;
   }
 
@@ -39,11 +38,10 @@ class AuthService {
       assert(user.uid == currentUser.uid);
 
       if (result.additionalUserInfo.isNewUser) {
-        await DatabaseService(uid: user.uid).updateProfile('',[]);
+        await DatabaseService(uid: user.uid).updateProfile('', []);
       }
       return _userFromFirebaseUser(user);
-    }
-    catch (error) {
+    } catch (error) {
       print(error.toString());
       return null;
     }
@@ -63,5 +61,4 @@ class AuthService {
     final user = _auth.currentUser;
     return _userFromFirebaseUser(user);
   }
-
 }
