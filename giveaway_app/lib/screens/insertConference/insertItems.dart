@@ -54,7 +54,7 @@ class _InsertItems extends State<InsertItems> {
                       "Insert Donation Items",
                       style: TextStyle(
                         fontFamily: 'Rubik',
-                        color: Color(0xFF5BBDB8),
+                        color: Color(0xFFec5568),
                         fontSize: 32.0,
                         fontWeight: FontWeight.w500,
                       ),
@@ -94,7 +94,7 @@ class _InsertItems extends State<InsertItems> {
             child: FloatingActionButton(
               heroTag: "btn1",
               child: Icon(Icons.add),
-              backgroundColor: Color(0xFF5BBDB8),
+              backgroundColor: Color(0xFFe9bf87),
               onPressed: onAddForm,
               foregroundColor: Colors.white,
             ),
@@ -105,7 +105,7 @@ class _InsertItems extends State<InsertItems> {
           child: FloatingActionButton(
             heroTag: "btn2",
             child: Icon(Icons.done),
-            backgroundColor: Color(0xFF5BBDB8),
+            backgroundColor: Color(0xFFe9bf87),
             onPressed: onSave,
             foregroundColor: Colors.white,
           ),
@@ -173,7 +173,7 @@ class _SpeakerFormState extends State<SpeakerForm> {
             children: [
               AppBar(
                 title: Text('Item'),
-                backgroundColor: Color(0xFF5BBDB8),
+                backgroundColor: Color(0xFFec5568),
                 automaticallyImplyLeading: false,
               ),
               TextFormField(

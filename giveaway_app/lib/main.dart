@@ -2,9 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:giveaway_app/models/user.dart';
-import 'package:giveaway_app/services/auth.dart';
 import 'package:giveaway_app/wrapper.dart';
+
+import 'models/user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,10 +17,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider<SmartconUser>.value(
-      value: SmartconUser(uid: 'yScVhq7iIzRLKNMFhSJnywnRkua2'),
+    return Provider<GiveAwayUser>.value(
+      value: GiveAwayUser(uid: "a"),
       child: MaterialApp(
-        title: 'SmartCon',
+        title: 'GiveAway',
         theme: ThemeData(
           // This is the theme of your application.
 
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
             // Page Title - purple
             headline2: GoogleFonts.rubik(
               textStyle: TextStyle(
-                color: Color(0xFF637DEB),
+                color: Color(0xfffc4058),
                 fontSize: 32.0,
                 fontWeight: FontWeight.w500,
               ),
@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
             // Buttons Text - purple
             headline5: GoogleFonts.rubik(
               textStyle: TextStyle(
-                color: Color(0xFF637DEB),
+                color: Color(0xFFff687c),
                 fontSize: 22.0,
                 fontWeight: FontWeight.w500,
               ),

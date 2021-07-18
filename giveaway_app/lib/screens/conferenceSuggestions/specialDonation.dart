@@ -1,10 +1,13 @@
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:giveaway_app/models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:giveaway_app/models/donation.dart';
 import 'package:giveaway_app/screens/insertConference/insertItems.dart';
 import 'package:giveaway_app/services/database.dart';
+
+import '../homePage.dart';
 
 class SpecialDonate extends StatefulWidget {
   SpecialDonate({Key key}) : super(key: key);
@@ -177,116 +180,126 @@ class _SpecialDonate extends State<SpecialDonate> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<List<Donation>>.value(
-        value: DatabaseService().donations,
-        child: Scaffold(
-            key: Key('donate_page'),
-            body: SingleChildScrollView(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                  // HEADER IMAGE (100%)
-                  Row(children: <Widget>[
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Image.asset('images/pageHeader.png',
-                          fit: BoxFit.fill),
-                    ),
-                  ]),
+    // TODO: implement build
+    final user = Provider.of<GiveAwayUser>(context);
+    return StreamBuilder<UserData>(
+        stream: DatabaseService(uid: user.uid).userData,
+        builder: (context, snapshot) {
+          UserData userData = snapshot.data;
+          return Scaffold(
+              key: Key('donate_page'),
+              body: SingleChildScrollView(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                    // HEADER IMAGE (100%)
+                    Row(children: <Widget>[
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Image.asset('images/pageHeader.png',
+                            fit: BoxFit.fill),
+                      ),
+                    ]),
 
-                  // CONTENT ROW
-                  Row(children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width * 0.08,
-                          right: MediaQuery.of(context).size.width * 0.08,
-                        ),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              // Page title
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.84,
-                                child: Text(
-                                  "Donate",
-                                  style: Theme.of(context).textTheme.headline2,
-                                ),
-                                alignment: Alignment.topLeft,
-                              ),
-                            ]))
-                  ]),
-
-                  Container(
-                    margin: EdgeInsets.all(24),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          _buildOrganization(),
-                          SizedBox(height: 15),
-                          _buildName(),
-                          SizedBox(height: 15),
-                          _buildPhoneNumber(),
-                          SizedBox(height: 15),
-                          _buildMoney(),
-                          Text('Select a payment method:',
-                              style: TextStyle(
-                                color: Colors.black38,
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'Rubik',
-                              )),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: Image.asset('images/payment.png',
-                                fit: BoxFit.fill),
+                    // CONTENT ROW
+                    Row(children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.08,
+                            right: MediaQuery.of(context).size.width * 0.08,
                           ),
-                          Container(
-                            padding: EdgeInsets.all(8),
-                            child: RaisedButton(
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                // Page title
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.84,
+                                  child: Text(
+                                    "Donate",
+                                    style:
+                                        Theme.of(context).textTheme.headline2,
+                                  ),
+                                  alignment: Alignment.topLeft,
+                                ),
+                              ]))
+                    ]),
+
+                    Container(
+                      margin: EdgeInsets.all(24),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            _buildOrganization(),
+                            SizedBox(height: 15),
+                            _buildName(),
+                            SizedBox(height: 15),
+                            _buildPhoneNumber(),
+                            SizedBox(height: 15),
+                            _buildMoney(),
+                            Text('Select a payment method:',
+                                style: TextStyle(
+                                  color: Colors.black38,
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: 'Rubik',
+                                )),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: Image.asset('images/payment.png',
+                                  fit: BoxFit.fill),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(8),
+                              child: RaisedButton(
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      side: BorderSide(
+                                          color: Colors.black26, width: 2)),
+                                  child: Text('ITEMS TO BE DONATED',
+                                      style: TextStyle(
+                                        color: Colors.black38,
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: 'Rubik',
+                                      )),
+                                  onPressed: onNext),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(8),
+                              child: RaisedButton(
                                 color: Colors.white,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0),
                                     side: BorderSide(
                                         color: Colors.black26, width: 2)),
-                                child: Text('ITEMS TO BE DONATED',
+                                child: Text('DONATE ',
                                     style: TextStyle(
                                       color: Colors.black38,
-                                      fontSize: 15.0,
+                                      fontSize: 16.0,
                                       fontWeight: FontWeight.w700,
                                       fontFamily: 'Rubik',
                                     )),
-                                onPressed: onNext),
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(8),
-                            child: RaisedButton(
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  side: BorderSide(
-                                      color: Colors.black26, width: 2)),
-                              child: Text('DONATE ',
-                                  style: TextStyle(
-                                    color: Colors.black38,
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: 'Rubik',
-                                  )),
-                              onPressed: () {
-                                if (_formKey.currentState.validate()) {
-                                  _formKey.currentState.save();
-                                  showAlertDialog(context);
-                                }
-                              },
+                                onPressed: () async {
+                                  await DatabaseService(uid: user.uid)
+                                      .updateProfile(userData.coins - 15);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()),
+                                  );
+                                },
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ]))));
+                  ])));
+        });
   }
 
   onNext() {
@@ -328,18 +341,13 @@ class _SpecialDonate extends State<SpecialDonate> {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("Read Carefully"),
-      content: Column(
-        children: [
-          Text(
-            "Since this is a Special Donation we ask you to indicate a place or link where we can buy the products, otherwise we will resort to our default makerts (you can check them in our website. You have to opptions for the money that is not spend in the products, give it to the organization or we can return it. Please choose one of the options bellow. Thank you.",
-            style: TextStyle(
-              color: Colors.blue,
-              fontSize: 20.0,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Rubik',
-            ),
-          ),
-        ],
+      content: Text(
+        "Read Carefully: \nSince this is a Special Donation we ask you to indicate a place or link where we can buy the products, otherwise we will resort to our default markets (you can check them in our website). \nYou have two options for any extra money you may send: it can be sent to the organisation or returned to the same account. Please choose the desired option below. Thank you.",
+        style: TextStyle(
+          color: Color(0xffec5568),
+          fontSize: 16.0,
+          fontFamily: 'Rubik',
+        ),
       ),
       actions: [okButton, okButton2],
     );

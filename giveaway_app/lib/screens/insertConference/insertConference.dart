@@ -204,32 +204,32 @@ class InsertConferenceState extends State<InsertConference> {
             "value": "Technology",
           },
           {
-            "display": "Art & Design",
-            "value": "Business Conference",
+            "display": "Hygiene",
+            "value": "Hygiene",
           },
           {
             "display": "Cultural",
             "value": "Cultural",
           },
           {
-            "display": "Finance",
-            "value": "Finance",
+            "display": "Children",
+            "value": "Children",
           },
           {
             "display": "Environmental",
             "value": "Environmental",
           },
           {
-            "display": "Sports",
-            "value": "Sports",
+            "display": "Clothes",
+            "value": "Clothes",
           },
           {
             "display": "Literature",
             "value": "Literature",
           },
           {
-            "display": "Marketing",
-            "value": "Marketing",
+            "display": "Animals",
+            "value": "Animals",
           },
           {
             "display": "Scientific",
@@ -304,6 +304,7 @@ class InsertConferenceState extends State<InsertConference> {
         ]),
         Padding(
             padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.width * 0.05,
               left: MediaQuery.of(context).size.width * 0.08,
               right: MediaQuery.of(context).size.width * 0.08,
             ),
@@ -312,10 +313,10 @@ class InsertConferenceState extends State<InsertConference> {
                 children: <Widget>[
                   Container(
                     child: Text(
-                      "Insert Conference",
+                      "Insert Your Organization",
                       style: TextStyle(
                         fontFamily: 'Rubik',
-                        color: Color(0xFF5BBDB8),
+                        color: Color(0xfffc4058),
                         fontSize: 32.0,
                         fontWeight: FontWeight.w500,
                       ),
@@ -332,9 +333,6 @@ class InsertConferenceState extends State<InsertConference> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 _buildName(),
-                _buildDistrict(),
-                SizedBox(height: 15),
-                _buildDate(),
                 SizedBox(height: 15),
                 _buildCategory(),
                 SizedBox(height: 15),

@@ -2,6 +2,7 @@ import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:giveaway_app/models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:giveaway_app/models/donation.dart';
 import 'package:giveaway_app/screens/insertConference/insertItems.dart';
@@ -43,7 +44,7 @@ class _Donate extends State<Donate> {
     return TextFormField(
       key: Key('address_field'),
       decoration: new InputDecoration(
-        labelText: "Adress to fetch the donation",
+        labelText: "Address to fetch the donation",
         fillColor: Colors.white,
         border: new OutlineInputBorder(
           borderRadius: new BorderRadius.circular(10.0),
@@ -180,175 +181,185 @@ class _Donate extends State<Donate> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<List<Donation>>.value(
-        value: DatabaseService().donations,
-        child: Scaffold(
-            key: Key('donate_page'),
-            body: SingleChildScrollView(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                  // HEADER IMAGE (100%)
-                  Row(children: <Widget>[
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Image.asset('images/pageHeader.png',
-                          fit: BoxFit.fill),
-                    ),
-                  ]),
+    // TODO: implement build
+    final user = Provider.of<GiveAwayUser>(context);
+    return StreamBuilder<UserData>(
+        stream: DatabaseService(uid: user.uid).userData,
+        builder: (context, snapshot) {
+          UserData userData = snapshot.data;
 
-                  // CONTENT ROW
-                  Row(children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width * 0.08,
-                          right: MediaQuery.of(context).size.width * 0.08,
-                        ),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              // Page title
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.84,
-                                child: Text(
-                                  "Donate",
-                                  style: Theme.of(context).textTheme.headline2,
-                                ),
-                                alignment: Alignment.topLeft,
-                              ),
-                            ]))
-                  ]),
+          return Scaffold(
+              key: Key('donate_page'),
+              body: SingleChildScrollView(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                    // HEADER IMAGE (100%)
+                    Row(children: <Widget>[
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Image.asset('images/pageHeader.png',
+                            fit: BoxFit.fill),
+                      ),
+                    ]),
 
-                  Container(
-                    margin: EdgeInsets.all(24),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          _buildOrganization(),
-                          SizedBox(height: 15),
-                          _buildAdress(),
-                          SizedBox(height: 15),
-                          _buildName(),
-                          SizedBox(height: 15),
-                          _buildPhoneNumber(),
-
-                          // Date Picker
-                          SizedBox(height: 10),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.84,
-                            child: Row(
-                              children: [
+                    // CONTENT ROW
+                    Row(children: <Widget>[
+                      Padding(
+                          padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.08,
+                            right: MediaQuery.of(context).size.width * 0.08,
+                          ),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                // Page title
                                 Container(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.54,
-                                  height: 50.0,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          width: 2.0, color: Colors.black26),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0))),
-                                  child: Text(datesStr,
+                                      MediaQuery.of(context).size.width * 0.84,
+                                  child: Text(
+                                    "Donate",
+                                    style:
+                                        Theme.of(context).textTheme.headline2,
+                                  ),
+                                  alignment: Alignment.topLeft,
+                                ),
+                              ]))
+                    ]),
+
+                    Container(
+                      margin: EdgeInsets.all(24),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            _buildOrganization(),
+                            SizedBox(height: 15),
+                            _buildAdress(),
+                            SizedBox(height: 15),
+                            _buildName(),
+                            SizedBox(height: 15),
+                            _buildPhoneNumber(),
+
+                            // Date Picker
+                            SizedBox(height: 10),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.84,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.54,
+                                    height: 50.0,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(
+                                            width: 2.0, color: Colors.black26),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0))),
+                                    child: Text(datesStr,
+                                        style: TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Rubik',
+                                        )),
+                                    padding: EdgeInsets.only(left: 10),
+                                    alignment: Alignment.centerLeft,
+                                  ),
+                                  Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.3,
+                                    child: ButtonTheme(
+                                      height: 50,
+                                      child: MaterialButton(
+                                          color: Color(0xFFec5568),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0)),
+                                          highlightElevation: 40.0,
+                                          onPressed: () async {
+                                            final List<DateTime> picked =
+                                                await DateRagePicker
+                                                    .showDatePicker(
+                                              context: context,
+                                              initialFirstDate:
+                                                  new DateTime.now(),
+                                              initialLastDate:
+                                                  (new DateTime.now()).add(
+                                                      new Duration(days: 7)),
+                                              firstDate: new DateTime(2020),
+                                              lastDate: new DateTime(2022),
+                                            );
+                                            if (picked != null &&
+                                                picked.length == 2) {
+                                              print(picked);
+                                              _onDateChanged(picked);
+                                            }
+                                          },
+                                          child: Text("Change",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w700,
+                                                fontFamily: 'Rubik',
+                                              ))),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            Container(
+                              padding: EdgeInsets.all(8),
+                              child: RaisedButton(
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      side: BorderSide(
+                                          color: Colors.black26, width: 2)),
+                                  child: Text('ITEMS TO BE DONATED',
                                       style: TextStyle(
-                                        color: Colors.black87,
+                                        color: Colors.black38,
                                         fontSize: 15.0,
-                                        fontWeight: FontWeight.w400,
+                                        fontWeight: FontWeight.w700,
                                         fontFamily: 'Rubik',
                                       )),
-                                  padding: EdgeInsets.only(left: 10),
-                                  alignment: Alignment.centerLeft,
-                                ),
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.3,
-                                  child: ButtonTheme(
-                                    height: 50,
-                                    child: MaterialButton(
-                                        color: Color(0xFF6E96EF),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0)),
-                                        highlightElevation: 40.0,
-                                        onPressed: () async {
-                                          final List<DateTime> picked =
-                                              await DateRagePicker
-                                                  .showDatePicker(
-                                            context: context,
-                                            initialFirstDate:
-                                                new DateTime.now(),
-                                            initialLastDate:
-                                                (new DateTime.now())
-                                                    .add(new Duration(days: 7)),
-                                            firstDate: new DateTime(2020),
-                                            lastDate: new DateTime(2022),
-                                          );
-                                          if (picked != null &&
-                                              picked.length == 2) {
-                                            print(picked);
-                                            _onDateChanged(picked);
-                                          }
-                                        },
-                                        child: Text("CHANGE",
-                                            style: TextStyle(
-                                              color: Colors.black38,
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.w700,
-                                              fontFamily: 'Rubik',
-                                            ))),
-                                  ),
-                                ),
-                              ],
+                                  onPressed: onNext),
                             ),
-                          ),
 
-                          Container(
-                            padding: EdgeInsets.all(8),
-                            child: RaisedButton(
+                            Container(
+                              padding: EdgeInsets.all(8),
+                              child: RaisedButton(
                                 color: Colors.white,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0),
                                     side: BorderSide(
                                         color: Colors.black26, width: 2)),
-                                child: Text('ITEMS TO BE DONATED',
+                                child: Text('DONATE ',
                                     style: TextStyle(
                                       color: Colors.black38,
-                                      fontSize: 15.0,
+                                      fontSize: 16.0,
                                       fontWeight: FontWeight.w700,
                                       fontFamily: 'Rubik',
                                     )),
-                                onPressed: onNext),
-                          ),
-
-                          Container(
-                            padding: EdgeInsets.all(8),
-                            child: RaisedButton(
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  side: BorderSide(
-                                      color: Colors.black26, width: 2)),
-                              child: Text('DONATE ',
-                                  style: TextStyle(
-                                    color: Colors.black38,
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: 'Rubik',
-                                  )),
-                              onPressed: () {
-                                if (_formKey.currentState.validate()) {
-                                  _formKey.currentState.save();
-                                  showAlertDialog(context);
-                                }
-                              },
+                                onPressed: () async {
+                                  await DatabaseService(uid: user.uid)
+                                      .updateProfile(userData.coins + 5);
+                                  if (_formKey.currentState.validate()) {
+                                    _formKey.currentState.save();
+                                    showAlertDialog(context);
+                                  }
+                                },
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ]))));
+                  ])));
+        });
   }
 
   onNext() {
@@ -381,24 +392,14 @@ showAlertDialog(BuildContext context) {
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
     title: Text("My title"),
-    content: Column(
-      children: [
-        Container(
-          child: Image.asset(
-            'images/coins.png',
-            width: 100,
-          ),
-        ),
-        Text(
-          "You just won extra G coins!!",
-          style: TextStyle(
-            color: Colors.blue,
-            fontSize: 20.0,
-            fontWeight: FontWeight.w500,
-            fontFamily: 'Rubik',
-          ),
-        ),
-      ],
+    content: Text(
+      "You just won 5 G coins!!",
+      style: TextStyle(
+        color: Color(0xffec5568),
+        fontSize: 20.0,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'Rubik',
+      ),
     ),
     actions: [
       okButton,

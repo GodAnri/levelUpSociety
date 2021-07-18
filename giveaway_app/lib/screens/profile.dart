@@ -81,7 +81,7 @@ class ProfileFormState extends State<ProfileForm> {
 
   @override
   Widget build(BuildContext context) {
-    SmartconUser user = Provider.of<SmartconUser>(context);
+    GiveAwayUser user = Provider.of<GiveAwayUser>(context);
     List<String> _interests = Provider.of<List<String>>(context) ?? [];
 
     return StreamBuilder<UserData>(
@@ -110,7 +110,7 @@ class ProfileFormState extends State<ProfileForm> {
                         child: DropDownFormField(
                           titleText: 'District',
                           hintText: 'Choose a district',
-                          value: _district ?? userData.district,
+                          /* value: _district ?? userData.district,*/
                           onSaved: (value) {
                             setState(() {
                               _district = value;
@@ -164,7 +164,7 @@ class ProfileFormState extends State<ProfileForm> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.84,
                       child: ChipsChoice<String>.multiple(
-                        value: _selectedInterests ?? userData.interests,
+                        /*  value: _selectedInterests ?? userData.interests,*/
                         onChanged: (val) =>
                             setState(() => _selectedInterests = val),
                         choiceItems: C2Choice.listFrom<String, String>(
@@ -182,9 +182,9 @@ class ProfileFormState extends State<ProfileForm> {
                             borderRadius: BorderRadius.circular(12)),
                         choiceActiveStyle: C2ChoiceStyle(
                             showCheckmark: false,
-                            borderColor: Color(0xFF637DEB),
+                            borderColor: Color(0xFFec5568),
                             labelStyle: TextStyle(
-                              color: Color(0xFF637DEB),
+                              color: Color(0xFFec5568),
                               fontSize: 17.0,
                               fontWeight: FontWeight.w500,
                               fontFamily: 'Rubik',
@@ -214,11 +214,10 @@ class ProfileFormState extends State<ProfileForm> {
                           onPressed: () async {
                             if (_keyProfile.currentState.validate()) {
                               _keyProfile.currentState.save();
-                              await DatabaseService(uid: user.uid)
-                                  .updateProfile(
-                                _district ?? userData.district,
+                              /* await DatabaseService(uid: user.uid).updateProfile(
+                                    _district ?? userData.district,
                                 _selectedInterests ?? userData.interests,
-                              );
+                                  );*/
 
                               Navigator.of(context).pop();
                             }

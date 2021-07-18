@@ -1,21 +1,11 @@
-class SmartconUser {
+class GiveAwayUser {
   final String uid;
-
-  SmartconUser({this.uid});
+  GiveAwayUser({this.uid});
 }
 
 class UserData {
   final String uid;
-  final String district;
-  final List<String> interests;
+  final int coins;
 
-  UserData({this.uid, this.district, this.interests});
-}
-
-class UserConference {
-  final String uid;
-  final String conferenceId;
-  final List<String> sessions;
-
-  UserConference({this.uid, this.conferenceId, this.sessions});
+  UserData({this.uid, this.coins});
 }
